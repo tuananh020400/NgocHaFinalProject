@@ -1,35 +1,22 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillRank - Nền tảng tuyển dụng IT dựa trên năng lực thực tế</title>
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .gradient-text {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .hero-pattern {
-            background-image: radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.15) 1px, transparent 0);
-            background-size: 40px 40px;
-        }
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-        }
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        .card-hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-    </style>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body class="bg-slate-50 text-slate-900">
 
@@ -52,12 +39,12 @@
                 </div>
 
                 <div class="flex items-center gap-3">
-                    <button class="hidden md:block text-slate-600 hover:text-slate-900 font-medium px-4 py-2">
+                    <a href="{% url 'login' %}" class="hidden md:block text-slate-600 hover:text-slate-900 font-medium px-4 py-2">
                         Đăng nhập
-                    </button>
-                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-semibold transition shadow-lg shadow-blue-600/30">
+                    </a>
+                    <a href="{% url 'register' %}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-semibold transition shadow-lg shadow-blue-600/30">
                         Bắt đầu ngay
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -81,18 +68,18 @@
                     </p>
                     
                     <!-- Search Bar -->
-                    <div class="bg-white p-2 rounded-2xl shadow-xl border border-slate-200 max-w-2xl">
+                    <form action="{% url 'search' %}" method="GET" class="bg-white p-2 rounded-2xl shadow-xl border border-slate-200 max-w-2xl hero-search">
                         <div class="flex gap-2">
                             <div class="flex-1 flex items-center px-4 rounded-xl bg-slate-50 border border-slate-200 focus-within:border-blue-500 transition">
                                 <i data-lucide="search" class="text-slate-400 w-5 h-5"></i>
-                                <input type="text" placeholder="Tìm thử thách theo kỹ năng (VD: Python, React, AI)..." 
+                                <input type="text" name="q" placeholder="Tìm thử thách theo kỹ năng (VD: Python, React, AI)..." 
                                     class="w-full px-3 py-3 bg-transparent outline-none text-slate-700 placeholder:text-slate-400">
                             </div>
-                            <button class="bg-slate-900 hover:bg-slate-800 text-white px-8 py-3 rounded-xl font-semibold transition flex items-center gap-2">
+                            <button type="submit" class="bg-slate-900 hover:bg-slate-800 text-white px-8 py-3 rounded-xl font-semibold transition flex items-center gap-2 whitespace-nowrap">
                                 Tìm kiếm
                             </button>
                         </div>
-                    </div>
+                    </form>
 
                     <div class="flex gap-6 mt-8 text-sm text-slate-500">
                         <div class="flex items-center gap-2">
@@ -111,7 +98,7 @@
                 </div>
 
                 <!-- Hero Stats Cards -->
-                <div class="relative">
+                <div class="relative hidden lg:block">
                     <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-3xl blur-3xl opacity-20 transform rotate-3"></div>
                     <div class="relative bg-white rounded-3xl shadow-2xl p-8 border border-slate-200">
                         <div class="flex justify-between items-center mb-8">
@@ -123,7 +110,7 @@
                             <!-- Rank 1 -->
                             <div class="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200">
                                 <div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center font-bold text-amber-700">1</div>
-                                <img src="https://ui-avatars.com/api/?name=Nguyen+Van+A&background=random" class="w-12 h-12 rounded-full">
+                                <img src="https://ui-avatars.com/api/?name=Nguyen+Van+A&background=random" class="w-12 h-12 rounded-full" alt="User">
                                 <div class="flex-1">
                                     <div class="font-semibold text-slate-900">Nguyễn Văn A</div>
                                     <div class="text-sm text-slate-500">AI Engineer</div>
@@ -137,7 +124,7 @@
                             <!-- Rank 2 -->
                             <div class="flex items-center gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
                                 <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600">2</div>
-                                <img src="https://ui-avatars.com/api/?name=Tran+Thi+B&background=random" class="w-12 h-12 rounded-full">
+                                <img src="https://ui-avatars.com/api/?name=Tran+Thi+B&background=random" class="w-12 h-12 rounded-full" alt="User">
                                 <div class="flex-1">
                                     <div class="font-semibold text-slate-900">Trần Thị B</div>
                                     <div class="text-sm text-slate-500">Data Scientist</div>
@@ -150,7 +137,7 @@
                             <!-- Rank 3 -->
                             <div class="flex items-center gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
                                 <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-600">3</div>
-                                <img src="https://ui-avatars.com/api/?name=Le+Van+C&background=random" class="w-12 h-12 rounded-full">
+                                <img src="https://ui-avatars.com/api/?name=Le+Van+C&background=random" class="w-12 h-12 rounded-full" alt="User">
                                 <div class="flex-1">
                                     <div class="font-semibold text-slate-900">Lê Văn C</div>
                                     <div class="text-sm text-slate-500">Backend Dev</div>
@@ -280,9 +267,9 @@
             </div>
 
             <div class="mt-8 text-center">
-                <button class="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700">
+                <a href="{% url 'challenges' %}" class="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700">
                     Xem tất cả thử thách <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </button>
+                </a>
             </div>
         </div>
     </section>
@@ -329,9 +316,9 @@
                         </div>
                     </div>
 
-                    <button class="mt-10 bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-xl font-semibold transition">
+                    <a href="{% url 'company_register' %}" class="inline-block mt-10 bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-xl font-semibold transition">
                         Đăng ký tuyển dụng
-                    </button>
+                    </a>
                 </div>
 
                 <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200">
@@ -377,12 +364,12 @@
                 Tham gia cộng đồng lập trình viên hàng đầu Việt Nam. Hoàn toàn miễn phí.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition shadow-lg shadow-blue-600/25">
+                <a href="{% url 'tutorial' %}" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition shadow-lg shadow-blue-600/25">
                     Bắt đầu với Tutorial
-                </button>
-                <button class="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-8 py-4 rounded-xl font-bold text-lg transition backdrop-blur">
+                </a>
+                <a href="#learn-more" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-8 py-4 rounded-xl font-bold text-lg transition backdrop-blur">
                     Tìm hiểu thêm
-                </button>
+                </a>
             </div>
         </div>
     </section>
